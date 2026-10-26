@@ -1,0 +1,97 @@
+{
+  "consumer": {
+    "name": "Shipping Service"
+  },
+  "interactions": [
+    {
+      "description": "a request for order ORD-123",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "order ORD-123 exists"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": [
+            "application/json"
+          ]
+        },
+        "method": "GET",
+        "path": "/orders/ORD-123"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "orderId": "ORD-123",
+            "shippingAddress": {
+              "city": "Berlin",
+              "country": "DE"
+            },
+            "status": "SHIPPED"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.orderId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.shippingAddress.city": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.shippingAddress.country": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "17.1.4"
+    },
+    "pactRust": {
+      "ffi": "0.5.8",
+      "models": "1.3.16"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "OrderService"
+  }
+}
